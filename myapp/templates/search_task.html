@@ -1,0 +1,50 @@
+{% extends "bases.html" %}
+
+{% block content %}
+    <h1>Search Task</h1>
+    <div class="search_task">
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="q">Task Name or Created Name</label>
+                <input type="text" id="q" name="q" placeholder="Search task name or created name" value="{{ query }}">
+            </div>
+            <button type="submit">Search Task</button>
+        </form>
+       {% if query %}
+            {% if result %}
+            <div>
+                <h2>The Search Result</h2>
+                <ol>
+                    {% for r in result %}
+                    <li>
+                        <strong>Task Name: </strong> {{ r.task }} - {{ r.status }} <br>
+                        <span>Person who created the task:</span> {{ r.name }} <br>
+                        <span>Description:</span> {{ r.task_description }}
+                    </li>
+                    {% endfor %}
+                </ol>
+            </div>
+            {% else %}
+                <p>No Tasks Found</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="list_task">
+        <h1>List of Todo Tasks</h1>
+        <ol>
+            {% for task in all_tasks %}
+            <li>
+                <h3>Task Name: {{ task.task }} - {{ task.status }}</h3>
+                <strong>Person who created the task:</strong> {{ task.name }} <br>
+                <p>Description: {{ task.task_description}}</p> 
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}
+
+
+
+

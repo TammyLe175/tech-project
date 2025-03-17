@@ -1,0 +1,21 @@
+
+{% extends "bases.html" %}
+
+{% block title %}Add Task{% endblock %}
+
+{% block content %}
+    <h1>Add New Task</h1>
+    <div class="add_task">
+        <form method="POST" class="addTask">
+            {% csrf_token %}
+            <div class="add_form"> {{ form.as_p }}</div>
+            <button type="submit" class="btn btn-success">Add Task</button>
+        </form>
+        {% if add_success %}
+        <div class="alert -success" role="alert"><strong>Success!</strong> The task has been successfully added.</div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}
+
